@@ -42,8 +42,6 @@ export default function Home(){
         }else if(name === 'Vegetation and Forests'){
             setColor("#cc0066")
         }          
-
-
 }
     return (
         <View style={styles.container}>
@@ -55,19 +53,23 @@ export default function Home(){
             userInterfaceStyle="dark"
             style={StyleSheet.absoluteFill}           
             >  
-                {dados.map(({properties, id}) => (
-                    <Circle
+                
+               {
+                dados.map(({properties, id}) => (
+                    <Marker
                     key={id}
-                    radius={7000}
-                    strokeColor={color}
-                    fillColor={color}
-                    center={{
+                    pinColor={color}
+                    coordinate={{
                         latitude: properties.latitude,
                         longitude: properties.longitude
                     }}
                     />
                     
-                ))} 
+                ))
+               
+               }
+                    
+               
 
             </MapView>
            
