@@ -1,20 +1,23 @@
 import React, {useState, useEffect, useRef} from "react";
-import { Image, Text, View, StyleSheet, Platform, TouchableOpacity, FlatList } from "react-native";
+import { Image, Text, View, StyleSheet, Platform, TouchableOpacity, FlatList,Alert } from "react-native";
 import MapView, { Marker, Circle} from "react-native-maps";
 import { Modalize } from 'react-native-modalize';
 import styles from './styles';
-import foco from "../../services/foco2"
-import filters from "../../mocks/filters";
+import  fluxoC02 from '../../mocks/fluxoC02.json';
+import filters from '../../mocks/filters'
+import { useRoute } from "@react-navigation/native";
 
 export default function Home(){
+    
     const modalizeRef = useRef(null);
+    const modalizeRefMarker = useRef(null);
+    const [cou, setCou] = useState();
     const [dados, setDados] = useState([]);
-    const [color, setColor] = useState("red")
-
     useEffect(() => {
-        setDados(foco)
-    }, []);
+        setDados(fluxoC02)
+    })
 
+    
     function onOpen(){
         modalizeRef.current?.open();
       };
@@ -22,80 +25,79 @@ export default function Home(){
         modalizeRef.current?.close();
     }
 
-      function filtraCor(name){
-        if(name === "Fire"){
-            setColor('red')
-        }else if(name === 'Arctic Ecosystems'){
-            setColor("#18AAF3")
-        }else if(name === 'Biomass'){
-            setColor("#66cc00")
-        }else if(name === 'Carbon Cycle'){
-            setColor("#cc6600")
-        }else if(name === 'Climate'){
-            setColor("#fff")
-        }else if(name === 'Hydrology and Cryosphere'){
-            setColor("#9999ff")
-        }else if(name === 'Land Use and Human Dimensions'){
-            setColor("#ffff33")
-        }else if(name === 'Soils'){
-            setColor("#000000")
-        }else if(name === 'Vegetation and Forests'){
-            setColor("#cc0066")
-        }          
-}
+
+
+    function onOpenMarker(){
+        modalizeRefMarker.current?.open();
+      };
+    function onCloseMarker(){
+        modalizeRefMarker.current?.close();
+    }
+
     return (
         <View style={styles.container}>
             <MapView
+            initialRegion={{
+                latitude: 64.8689,
+                longitude: -111.5748,
+                latitudeDelta: 1,
+                longitudeDelta: 1
+            }}
             mapType={'satellite'}
+            paddingAdjustmentBehavior={'always'}
             scrollEnabled={true}
             rotateEnabled={false}
-            scrollDuringRotateOrZoomEnabled={false}
+            scrollDuringRotateOrZoomEnabled={true}
             userInterfaceStyle="dark"
             style={StyleSheet.absoluteFill}           
             >  
                 
-               {
-                dados.map(({properties, id}) => (
+             {
+                dados.map(({latitude, longitude, id, country }) => (
                     <Marker
                     key={id}
-                    pinColor={color}
+                    onPress={onOpenMarker}
+                    pinColor={'red'}
                     coordinate={{
-                        latitude: properties.latitude,
-                        longitude: properties.longitude
-                    }}
-                    />
+                        latitude: latitude,
+                        longitude: longitude
+                    }} 
                     
+                    />   
                 ))
-               
-               }
-                    
-               
-
+             }
             </MapView>
+            <Modalize
+                ref={modalizeRefMarker}
+                snapPoint={500}
+                modalHeight={500}
+                >
+                <Text>{cou}</Text>   
+            </Modalize> 
            
                 <TouchableOpacity style={styles.button} onPress={onOpen}>
                     <Text style={styles.button__text}>Filter</Text>
                 </TouchableOpacity>
                
                 <Modalize 
-                modalStyle={{backgroundColor: '#a71b1a'}}
-                withHandle={Platform.OS === 'android'? false : true}
-                ref={modalizeRef}
-                snapPoint={Platform.OS === 'ios'? 270 : 310}
-                modalHeight={Platform.OS === 'ios'? 270 : 310}
-                withReactModal={true}
+                    modalStyle={{backgroundColor: '#a71b1a'}}
+                    withHandle={Platform.OS === 'android'? false : true}
+                    ref={modalizeRef}
+                    snapPoint={Platform.OS === 'ios'? 270 : 310}
+                    modalHeight={Platform.OS === 'ios'? 270 : 310}
+                    withReactModal={true}
                 >
                   
                 <FlatList horizontal={true} style={styles.modal} 
-                data={filters}
-                showsHorizontalScrollIndicator={false}
-                keyExtractor={({name}, index) => name}
-                renderItem={({item}) => (
-                    
-                  <TouchableOpacity onPress={() => {filtraCor(item.name)}}>
-                      <Image source={item.image} style={styles.modal__image}  />
-                      <Text style={styles.modal__text}>{item.name}</Text>
-                  </TouchableOpacity>
+                    data={filters}
+                    showsHorizontalScrollIndicator={false}
+                    keyExtractor={({name}, index) => name}
+                    renderItem={({item}) => (
+                        
+                    <TouchableOpacity>
+                        <Image source={item.image} style={styles.modal__image}  />
+                        <Text style={styles.modal__text}>{item.name}</Text>
+                    </TouchableOpacity>
                  
                   
                 )}
@@ -103,10 +105,10 @@ export default function Home(){
                 />
                 {Platform.OS === 'android'? 
                  <View style={{ backgroundColor: '#a71b1a'}}>
-                 <TouchableOpacity style={styles.close__button} onPress={onClose}>
-                     <Text style={styles.close__button__text} >Close</Text>
-                   </TouchableOpacity>
-                   </View>
+                    <TouchableOpacity style={styles.close__button} onPress={onClose}>
+                        <Text style={styles.close__button__text} >Close</Text>
+                    </TouchableOpacity>
+                </View>
                    :
                    null
             }
@@ -116,3 +118,4 @@ export default function Home(){
         </View>
     )
 }
+
