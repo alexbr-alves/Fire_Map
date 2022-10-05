@@ -31,17 +31,16 @@ export default function TabRoutes() {
         },
         headerShown: false,
       })}>
-        
-        <Tab.Screen name="Home" component={Home} options={{
+         <Tab.Screen name="Home" component={Home} options={{
             title: '', tabBarIcon: ({focused}) =>
             <IconHome name='earth' size={30} color={focused? '#a71b1a': '#e75b5a'}/>
             }} />
-
+        
         <Tab.Screen name="Education" component={Education} options={{
             title: ' ', tabBarIcon: ({focused}) =>
             <IconBook name='book' size={30} color={focused? '#a71b1a': '#e75b5a'}/> }} />
-
-            <Tab.Screen name="Forum" component={Forum} options={{
+       
+          <Tab.Screen name="Forum" component={Forum} options={{
             title: ' ', tabBarIcon: ({focused}) =>
             <IconForum name='forum' size={30} color={focused? '#a71b1a': '#e75b5a'}/> }} />
 
