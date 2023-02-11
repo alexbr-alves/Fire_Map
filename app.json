@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "hackathon",
-    "slug": "hackathon",
+    "name": "Map_Fire",
+    "slug": "Map_Fire",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
