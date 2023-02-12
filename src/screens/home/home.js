@@ -17,13 +17,6 @@ export default function Home(){
     const [dados, setDados] = useState(focos.americaSul);
     const [isOpen, setIsOpen] = useState(false); 
    
-    const pickerItems = [
-        { label: 'América do Sul', value: 'América do Sul' },
-        { label: 'América do Norte e Central', value: 'América do Norte' },
-        { label: 'África', value: 'África' },
-        { label: 'Europa', value: 'Europa' },
-        
-      ];
     
       function addList(municipio, estado, pais, data, satelite, bioma, frp) {
         list.unshift(
