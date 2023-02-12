@@ -45,4 +45,13 @@ mas sim que houve uma taxa elevada de Fire Radiative Power (FRP)".
 <h2>Demostrações complementares</h2>
 
 ![modelo 3 telas](https://user-images.githubusercontent.com/103543739/218286886-78f3112f-d328-41c0-85ab-9f18fbee595f.png)
-
+<br>
+<h3>
+Aponte a camera nativa do seu Iphone com o aplicativo EXPO já instalado para o QR-Code.
+obs: Esta aplicação foi testada apenas com celular IOS. Portanto, não garanto que o aplicativo se comporte no celular Android da mesma forma 
+que se comporta com celular IOS.
+</h3>
+<br>
+<p align="center">
+<img src="https://user-images.githubusercontent.com/103543739/218289145-1a47334a-98ff-4a95-a4e9-cc36e2600874.png">
+</p>
