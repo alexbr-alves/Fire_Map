@@ -38,9 +38,8 @@ mas sim que houve uma taxa elevada de Fire Radiative Power (FRP)".
 <h2>VIDEO DEMOSTRATIVO</h2>
 <br>
 
-<p align="center">
-<video src="https://user-images.githubusercontent.com/103543739/218286853-92f92efa-38a0-44e6-8911-95d17f9a1f57.mp4">
-</p>
+
+https://user-images.githubusercontent.com/103543739/218286853-92f92efa-38a0-44e6-8911-95d17f9a1f57.mp4
 
 <h2>Demostrações complementares</h2>
 
